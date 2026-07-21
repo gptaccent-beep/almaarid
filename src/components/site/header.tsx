@@ -47,6 +47,7 @@ export function Header({initialSettings}: Props) {
           <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full bg-ink shadow-glow dark:bg-ivory">
             <MediaImage
               src={safeSettings.logo || defaultLogo}
+              fallbackSrc={defaultLogo}
               alt=""
               width={36}
               height={36}

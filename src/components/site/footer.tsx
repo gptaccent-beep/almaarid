@@ -4,7 +4,7 @@ import {Facebook, Globe2, Instagram, Mail, MapPin, Phone, Youtube} from 'lucide-
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
 import {MediaImage} from '@/components/shared/media-image';
-import {textFor} from '@/lib/regions';
+import {defaultLogo, textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
 import {defaultSiteSettings} from '@/lib/site-settings';
 import type {Locale, SiteSettings} from '@/lib/types';
@@ -29,7 +29,14 @@ export function Footer({settings}: Props) {
         <div className="max-w-2xl">
           <div className="mb-4 flex items-center gap-3">
             <div className="grid h-12 w-12 place-items-center overflow-hidden rounded-full bg-ink text-ivory dark:bg-ivory">
-              <MediaImage src={settings.logo} alt="" width={40} height={40} className="h-10 w-10 object-contain p-1" />
+              <MediaImage
+                src={settings.logo}
+                fallbackSrc={defaultLogo}
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain p-1"
+              />
             </div>
             <div>
               <p className="text-xs font-black uppercase tracking-[0.28em] text-clay-700 dark:text-saffron">

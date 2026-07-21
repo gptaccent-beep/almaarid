@@ -10,7 +10,7 @@ import {HeroSlider} from '@/components/home/hero-slider';
 import {LiveVisitorsCounter} from '@/components/home/live-visitors-counter';
 import {MediaImage} from '@/components/shared/media-image';
 import {useCooperatives, useSiteSettings} from '@/lib/client/api';
-import {textFor} from '@/lib/regions';
+import {defaultIdentityImage, textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
 import {defaultSiteSettings} from '@/lib/site-settings';
 import type {Cooperative, Locale, Region, SiteSettings} from '@/lib/types';
@@ -65,6 +65,7 @@ export function HomeExperience({initialRegions, initialCooperatives, initialSett
       <section className="relative isolate overflow-hidden px-5 pb-16 pt-24 sm:px-8 lg:px-12 lg:pb-20">
         <MediaImage
           src={safeSettings.content?.intro?.backgroundImage || '/assets/morocco-cinematic-hero.png'}
+          fallbackSrc="/assets/morocco-cinematic-hero.png"
           alt=""
           fill
           sizes="100vw"
@@ -228,6 +229,7 @@ export function HomeExperience({initialRegions, initialCooperatives, initialSett
                 >
                   <MediaImage
                     src={region.image}
+                    fallbackSrc={defaultIdentityImage}
                     alt=""
                     fill
                     sizes="(min-width: 768px) 50vw, 100vw"

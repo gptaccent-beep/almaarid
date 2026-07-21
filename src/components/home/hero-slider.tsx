@@ -1,9 +1,9 @@
 'use client';
 
 import {ChevronLeft, ChevronRight} from 'lucide-react';
-import Image from 'next/image';
 import {useTranslations} from 'next-intl';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {MediaImage} from '@/components/shared/media-image';
 import {cn} from '@/lib/utils';
 
 const AUTOPLAY_MS = 4500;
@@ -81,9 +81,10 @@ export function HeroSlider({images, className}: Props) {
     >
       <div className="relative aspect-[16/11] min-h-[360px] overflow-hidden rounded-[1.6rem] sm:aspect-[16/10] lg:min-h-[560px]">
         {slides.map((src, index) => (
-          <Image
+          <MediaImage
             key={`${src}-${index}`}
             src={src}
+            fallbackSrc="/images/morocco-cinematic-hero.png"
             alt=""
             fill
             priority={index === 0}
@@ -94,7 +95,6 @@ export function HeroSlider({images, className}: Props) {
               reducedMotion ? '' : 'transition duration-700 ease-out',
               index === activeIndex ? 'z-10 opacity-100 scale-100' : 'z-0 opacity-0 scale-[1.03]'
             )}
-            draggable={false}
           />
         ))}
         <div className="absolute inset-0 z-20 bg-gradient-to-t from-ink/64 via-ink/14 to-transparent" />

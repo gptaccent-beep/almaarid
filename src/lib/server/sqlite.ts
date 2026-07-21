@@ -1,6 +1,7 @@
 import {DatabaseSync} from 'node:sqlite';
 import {nanoid} from 'nanoid';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import {createAllDemoCooperatives} from '@/lib/demo-content';
 import {defaultIdentityImage, defaultLogo, regionsSeed} from '@/lib/regions';
@@ -42,7 +43,9 @@ type SiteSettingsRow = {
   updated_at: string;
 };
 
-const dataDir = path.join(process.cwd(), 'data');
+// Vercel's deployed bundle lives under /var/task, which is read-only at runtime.
+// Keep the local SQLite fallback writable by moving it to /tmp only on Vercel.
+const dataDir = process.env.VERCEL ? path.join(os.tmpdir(), 'almaarid') : path.join(process.cwd(), 'data');
 const databasePath = path.join(dataDir, 'almaarid.sqlite');
 
 let db: DatabaseSync | null = null;

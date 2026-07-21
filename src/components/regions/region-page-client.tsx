@@ -8,7 +8,7 @@ import {useMemo} from 'react';
 import {CooperativeCard} from '@/components/cooperatives/cooperative-card';
 import {MediaImage} from '@/components/shared/media-image';
 import {useCooperatives, useRegions} from '@/lib/client/api';
-import {textFor} from '@/lib/regions';
+import {defaultIdentityImage, textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
 import type {Cooperative, Locale, Region} from '@/lib/types';
 
@@ -34,7 +34,15 @@ export function RegionPageClient({slug, initialRegion, initialCooperatives}: Pro
           transition={{duration: 0.7}}
           className="relative overflow-hidden rounded-[2rem] border border-ink/10 bg-ink text-ivory shadow-lift"
         >
-          <MediaImage src={region.image} alt="" fill priority sizes="100vw" className="object-cover opacity-50" />
+          <MediaImage
+            src={region.image}
+            fallbackSrc={defaultIdentityImage}
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-50"
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/68 to-ink/18" />
           <div className="relative z-10 grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:p-14">
             <div>

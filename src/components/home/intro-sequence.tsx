@@ -60,6 +60,7 @@ export function IntroSequence({initialSettings}: Props) {
             <span className="grid h-16 w-16 place-items-center rounded-full bg-ivory p-2 shadow-glow">
               <MediaImage
                 src={initialSettings.logo || defaultLogo}
+                fallbackSrc={defaultLogo}
                 alt=""
                 width={48}
                 height={48}

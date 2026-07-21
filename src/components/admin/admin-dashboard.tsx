@@ -946,6 +946,7 @@ export function AdminDashboard() {
                       <div className="relative h-14 w-14 overflow-hidden rounded-2xl bg-ink/5 dark:bg-white/5">
                         <MediaImage
                           src={coop.logo || defaultLogo}
+                          fallbackSrc={defaultLogo}
                           alt=""
                           fill
                           sizes="56px"
@@ -1005,7 +1006,14 @@ export function AdminDashboard() {
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                           {selectedCooperative.productImages.map((src, index) => (
                             <div key={`${src}-${index}`} className="relative aspect-square overflow-hidden rounded-2xl">
-                              <MediaImage src={src} alt="" fill sizes="140px" className="object-cover" />
+                              <MediaImage
+                                src={src}
+                                fallbackSrc={defaultIdentityImage}
+                                alt=""
+                                fill
+                                sizes="140px"
+                                className="object-cover"
+                              />
                             </div>
                           ))}
                         </div>

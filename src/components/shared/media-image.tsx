@@ -2,6 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Image from 'next/image';
+import {useEffect, useMemo, useState} from 'react';
 import {cn} from '@/lib/utils';
 
 const STATIC_PREFIXES = ['/assets/', '/icons/', '/images/', '/sliders/'];
@@ -35,7 +36,17 @@ export function MediaImage({
   priority = false,
   loading
 }: Props) {
-  const resolvedSrc = (src && src.trim()) || fallbackSrc || '';
+  const candidates = useMemo(() => {
+    const values = [(src && src.trim()) || '', fallbackSrc || ''].filter(Boolean);
+    return Array.from(new Set(values));
+  }, [fallbackSrc, src]);
+  const [candidateIndex, setCandidateIndex] = useState(0);
+
+  useEffect(() => {
+    setCandidateIndex(0);
+  }, [candidates]);
+
+  const resolvedSrc = candidates[candidateIndex] || '';
   if (!resolvedSrc) return null;
 
   if (isStaticAsset(resolvedSrc)) {
@@ -49,6 +60,7 @@ export function MediaImage({
         height={fill ? undefined : height}
         priority={priority}
         className={className}
+        onError={() => setCandidateIndex((current) => Math.min(current + 1, candidates.length))}
       />
     );
   }
@@ -64,6 +76,7 @@ export function MediaImage({
       width={fill ? undefined : width}
       height={fill ? undefined : height}
       className={imgClassName}
+      onError={() => setCandidateIndex((current) => Math.min(current + 1, candidates.length))}
     />
   );
 }
