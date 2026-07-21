@@ -1,10 +1,10 @@
 'use client';
 
 import {MapPin, Moon, Sun} from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
 import {memo, useCallback, useEffect} from 'react';
+import {MediaImage} from '@/components/shared/media-image';
 import {LanguageSwitcher} from '@/components/site/language-switcher';
 import {useSiteSettings} from '@/lib/client/api';
 import {defaultLogo, textFor} from '@/lib/regions';
@@ -45,13 +45,11 @@ export function Header({initialSettings}: Props) {
           className="focus-ring flex min-w-0 flex-1 items-center gap-2 rounded-full px-2 py-1 text-start sm:flex-none"
         >
           <span className="relative grid h-9 w-9 shrink-0 place-items-center overflow-hidden rounded-full bg-ink shadow-glow dark:bg-ivory">
-            <Image
+            <MediaImage
               src={safeSettings.logo || defaultLogo}
               alt=""
               width={36}
               height={36}
-              sizes="36px"
-              unoptimized
               className="h-full w-full object-contain p-1.5"
             />
           </span>

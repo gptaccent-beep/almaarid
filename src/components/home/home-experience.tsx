@@ -2,13 +2,13 @@
 
 import {ArrowDown, MapPin} from 'lucide-react';
 import {motion, useReducedMotion} from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
 import {useMemo, useState} from 'react';
 import {CooperativeCard} from '@/components/cooperatives/cooperative-card';
 import {HeroSlider} from '@/components/home/hero-slider';
 import {LiveVisitorsCounter} from '@/components/home/live-visitors-counter';
+import {MediaImage} from '@/components/shared/media-image';
 import {useCooperatives, useSiteSettings} from '@/lib/client/api';
 import {textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
@@ -63,7 +63,7 @@ export function HomeExperience({initialRegions, initialCooperatives, initialSett
   return (
     <main className="min-h-screen overflow-hidden">
       <section className="relative isolate overflow-hidden px-5 pb-16 pt-24 sm:px-8 lg:px-12 lg:pb-20">
-        <Image
+        <MediaImage
           src={safeSettings.content?.intro?.backgroundImage || '/assets/morocco-cinematic-hero.png'}
           alt=""
           fill
@@ -226,7 +226,7 @@ export function HomeExperience({initialRegions, initialCooperatives, initialSett
                   href={publicSitePath(locale, `/region/${region.slug}`)}
                   className="group relative block min-h-[240px] overflow-hidden rounded-[1.75rem] border border-ink/10 bg-ink text-ivory shadow-lift"
                 >
-                  <Image
+                  <MediaImage
                     src={region.image}
                     alt=""
                     fill

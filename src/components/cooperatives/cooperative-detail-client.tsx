@@ -2,13 +2,14 @@
 
 import {ArrowRight, Globe, Heart, Mail, Phone, Eye} from 'lucide-react';
 import {motion} from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
 import {useEffect, useMemo, useRef} from 'react';
 import {LikeButton} from '@/components/cooperatives/like-button';
 import {WhatsAppButton} from '@/components/cooperatives/whatsapp-button';
+import {MediaImage} from '@/components/shared/media-image';
 import {useCooperative, useIncrementView, useRegions} from '@/lib/client/api';
+import {defaultIdentityImage, defaultLogo} from '@/lib/regions';
 import {textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
 import type {Cooperative, Locale, Region} from '@/lib/types';
@@ -62,13 +63,28 @@ export function CooperativeDetailClient({id, initialCooperative, initialRegions}
             className="overflow-hidden rounded-[2rem] border border-ink/10 bg-ink shadow-lift"
           >
             <div className="relative aspect-[4/3]">
-              <Image src={cooperative.identityImage} alt="" fill priority sizes="100vw" className="object-cover opacity-70" />
+              <MediaImage
+                src={cooperative.identityImage}
+                fallbackSrc={defaultIdentityImage}
+                alt=""
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover opacity-70"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
               <div className="absolute inset-0 grid place-items-center p-8 text-center text-ivory">
                 <div>
-                  <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-full bg-ivory p-2 shadow-glow">
-                    <Image src={cooperative.logo} alt="" width={56} height={56} className="h-14 w-14 object-contain" />
-                  </div>
+                    <div className="mx-auto mb-4 grid h-20 w-20 place-items-center rounded-full bg-ivory p-2 shadow-glow">
+                    <MediaImage
+                      src={cooperative.logo}
+                      fallbackSrc={defaultLogo}
+                      alt=""
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                    />
+                    </div>
                   <h1 className="font-display text-4xl font-semibold sm:text-6xl">{textFor(cooperative.name, locale)}</h1>
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-ivory/75 sm:text-lg">
                     {textFor(cooperative.story, locale)}
@@ -135,7 +151,7 @@ export function CooperativeDetailClient({id, initialCooperative, initialRegions}
             {cooperative.productImages.length ? (
               cooperative.productImages.map((src, index) => (
                 <div key={`${src}-${index}`} className="relative aspect-square overflow-hidden rounded-[1.2rem]">
-                  <Image src={src} alt="" fill sizes="(min-width: 1280px) 25vw, 50vw" className="object-cover" />
+                  <MediaImage src={src} fallbackSrc={defaultIdentityImage} alt="" fill sizes="(min-width: 1280px) 25vw, 50vw" className="object-cover" />
                 </div>
               ))
             ) : (

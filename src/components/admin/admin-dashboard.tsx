@@ -1,11 +1,11 @@
 'use client';
 
 import {Plus, Save, Trash2, Shield} from 'lucide-react';
-import Image from 'next/image';
 import {useLocale, useTranslations} from 'next-intl';
 import {useEffect, useState} from 'react';
 import {MediaPicker} from '@/components/admin/media-picker';
 import {LocalizedTextEditor} from '@/components/admin/localized-text-editor';
+import {MediaImage} from '@/components/shared/media-image';
 import {
   adminJsonRequest,
   useCreateCooperative,
@@ -944,7 +944,13 @@ export function AdminDashboard() {
                   >
                     <div className="flex items-center gap-4 p-4">
                       <div className="relative h-14 w-14 overflow-hidden rounded-2xl bg-ink/5 dark:bg-white/5">
-                        <Image src={coop.logo || defaultLogo} alt="" fill sizes="56px" className="object-contain p-2" />
+                        <MediaImage
+                          src={coop.logo || defaultLogo}
+                          alt=""
+                          fill
+                          sizes="56px"
+                          className="object-contain p-2"
+                        />
                       </div>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-semibold">{textFor(coop.name, locale)}</p>
@@ -999,7 +1005,7 @@ export function AdminDashboard() {
                         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
                           {selectedCooperative.productImages.map((src, index) => (
                             <div key={`${src}-${index}`} className="relative aspect-square overflow-hidden rounded-2xl">
-                              <Image src={src} alt="" fill sizes="140px" className="object-cover" />
+                              <MediaImage src={src} alt="" fill sizes="140px" className="object-cover" />
                             </div>
                           ))}
                         </div>

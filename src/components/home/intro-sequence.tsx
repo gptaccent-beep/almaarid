@@ -1,9 +1,9 @@
 'use client';
 
 import {AnimatePresence, motion} from 'framer-motion';
-import Image from 'next/image';
 import {useLocale} from 'next-intl';
 import {useEffect, useState} from 'react';
+import {MediaImage} from '@/components/shared/media-image';
 import {defaultLogo, textFor} from '@/lib/regions';
 import {defaultSiteSettings} from '@/lib/site-settings';
 import type {Locale, SiteSettings} from '@/lib/types';
@@ -58,12 +58,11 @@ export function IntroSequence({initialSettings}: Props) {
             className="grid place-items-center gap-4 will-change-transform"
           >
             <span className="grid h-16 w-16 place-items-center rounded-full bg-ivory p-2 shadow-glow">
-              <Image
+              <MediaImage
                 src={initialSettings.logo || defaultLogo}
                 alt=""
                 width={48}
                 height={48}
-                unoptimized
                 className="h-12 w-12 object-contain"
               />
             </span>

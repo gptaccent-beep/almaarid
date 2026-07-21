@@ -2,11 +2,12 @@
 
 import {Eye, MapPin} from 'lucide-react';
 import {motion, useReducedMotion} from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
 import {useLocale, useTranslations} from 'next-intl';
+import {MediaImage} from '@/components/shared/media-image';
 import {LikeButton} from '@/components/cooperatives/like-button';
 import {WhatsAppButton} from '@/components/cooperatives/whatsapp-button';
+import {defaultIdentityImage, defaultLogo} from '@/lib/regions';
 import {textFor} from '@/lib/regions';
 import {publicSitePath} from '@/lib/routes';
 import type {Cooperative, Locale} from '@/lib/types';
@@ -48,8 +49,9 @@ export function CooperativeCard({cooperative, index = 0}: Props) {
           <div className="isometric-card">
             <div className="relative overflow-hidden rounded-[1.6rem] border border-ink/10 bg-ivory shadow-lift transition-shadow duration-500 group-hover:shadow-[0_30px_90px_rgba(17,20,19,.24)] dark:bg-atlas-950 dark:group-hover:shadow-[0_30px_90px_rgba(0,0,0,.42)]">
               <Link href={publicSitePath(locale, `/cooperative/${cooperative.id}`)} className="relative block aspect-[4/5]">
-                <Image
+                <MediaImage
                   src={cooperative.identityImage}
+                  fallbackSrc={defaultIdentityImage}
                   alt=""
                   fill
                   sizes="(min-width: 1024px) 30vw, 90vw"
@@ -73,7 +75,14 @@ export function CooperativeCard({cooperative, index = 0}: Props) {
               <div className="relative z-20 flex items-center justify-between gap-3 border-t border-ink/10 px-4 py-4 dark:border-white/10">
                 <div className="flex items-center gap-3">
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-ink/5 p-1 dark:bg-white/5">
-                    <Image src={cooperative.logo} alt="" width={42} height={42} className="h-10 w-10 object-contain" />
+                    <MediaImage
+                      src={cooperative.logo}
+                      fallbackSrc={defaultLogo}
+                      alt=""
+                      width={42}
+                      height={42}
+                      className="h-10 w-10 object-contain"
+                    />
                   </div>
                   <div>
                     <p className="text-xs uppercase tracking-[0.22em] text-ink/50 dark:text-ivory/50">{t('views')}</p>
