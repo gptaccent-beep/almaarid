@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --font-display: var(--font-latin);
+  --font-sans: var(--font-latin);
+  --color-ink: 8 14 13;
+  --color-ivory: 255 250 240;
+  --color-saffron: 206 160 55;
+  --color-clay-50: 238 245 237;
+  --color-clay-100: 220 234 223;
+  --color-clay-300: 143 179 158;
+  --color-clay-500: 76 125 102;
+  --color-clay-700: 29 72 61;
+  --color-clay-900: 10 31 27;
+  --color-atlas-50: 235 246 241;
+  --color-atlas-200: 174 211 195;
+  --color-atlas-500: 40 99 81;
+  --color-atlas-800: 14 54 45;
+  --color-atlas-950: 5 28 24;
+  --noise: radial-gradient(circle at 1px 1px, rgb(var(--color-ink) / 0.08) 1px, transparent 0);
+}
+
+.dark {
+  color-scheme: dark;
+  --color-ink: 4 9 8;
+  --color-ivory: 255 255 255;
+  --color-saffron: 222 178 82;
+  --color-clay-50: 235 246 241;
+  --color-clay-100: 204 224 214;
+  --color-clay-300: 126 171 150;
+  --color-clay-500: 64 125 101;
+  --color-clay-700: 24 82 66;
+  --color-clay-900: 8 40 34;
+  --color-atlas-50: 229 243 237;
+  --color-atlas-200: 167 207 189;
+  --color-atlas-500: 34 111 88;
+  --color-atlas-800: 8 50 41;
+  --color-atlas-950: 3 24 20;
+}
+
+html[lang='ar'] {
+  --font-display: var(--font-arabic);
+  --font-sans: var(--font-arabic);
+}
+
+html[lang='fr'],
+html[lang='en'] {
+  --font-display: var(--font-latin);
+  --font-sans: var(--font-latin);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  font-size: clamp(16.75px, 0.28vw + 16px, 18.25px);
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at 12% 14%, rgb(var(--color-saffron) / 0.14), transparent 24rem),
+    radial-gradient(circle at 86% 16%, rgb(var(--color-atlas-500) / 0.1), transparent 26rem),
+    linear-gradient(120deg, rgb(var(--color-saffron) / 0.1) 0 18%, transparent 18% 100%),
+    linear-gradient(135deg, #f8edd3 0%, #fff8e9 40%, #efd9a7 72%, #e7d79f 100%);
+  color: rgb(var(--color-ink));
+  font-family: var(--font-sans), system-ui, sans-serif;
+  line-height: 1.62;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgb(var(--color-ivory) / 0.86), rgb(var(--color-saffron) / 0.22) 46%, rgb(var(--color-atlas-500) / 0.1)),
+    url('/assets/morocco-cinematic-hero.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  filter: saturate(0.88) contrast(0.96);
+  animation: cinematicDrift 34s ease-in-out infinite alternate;
+  transform: scale(1.04);
+  transform-origin: center;
+  will-change: transform, background-position;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    linear-gradient(135deg, rgb(var(--color-saffron) / 0.12) 25%, transparent 25%),
+    linear-gradient(225deg, rgb(var(--color-saffron) / 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, rgb(var(--color-saffron) / 0.08) 25%, transparent 25%),
+    linear-gradient(315deg, rgb(var(--color-atlas-500) / 0.06) 25%, transparent 25%),
+    radial-gradient(circle at 1.5rem 1.5rem, rgb(var(--color-saffron) / 0.26) 0 0.08rem, transparent 0.09rem);
+  background-position:
+    -9rem -9rem,
+    calc(100% + 10rem) -10rem,
+    -11rem 48%,
+    calc(100% + 12rem) 32%,
+    16% calc(100% + 13rem),
+    78% calc(100% + 11rem),
+    0 0,
+    28px 0,
+    28px -28px,
+    0 28px,
+    0 0;
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat, repeat, repeat, repeat;
+  background-size: 18rem 18rem, 22rem 22rem, 22rem 22rem, 24rem 24rem, 26rem 26rem, 16rem 16rem, 56px 56px, 56px 56px, 56px 56px, 56px 56px, 56px 56px;
+  opacity: 0.055;
+  mix-blend-mode: multiply;
+}
+
+.dark body {
+  background:
+    radial-gradient(circle at top left, rgb(var(--color-saffron) / 0.18), transparent 30rem),
+    radial-gradient(circle at bottom right, rgb(var(--color-atlas-500) / 0.26), transparent 34rem),
+    linear-gradient(135deg, #031814 0%, #08231d 48%, #020706 100%);
+  color: rgb(var(--color-ivory));
+}
+
+.dark body::before {
+  background:
+    linear-gradient(135deg, rgb(var(--color-atlas-950) / 0.92), rgb(var(--color-atlas-800) / 0.72) 54%, rgb(var(--color-ink) / 0.5)),
+    url('/assets/morocco-cinematic-hero.png');
+  opacity: 0.1;
+  mix-blend-mode: screen;
+  filter: saturate(0.84) contrast(1.05);
+}
+
+.dark body::after {
+  opacity: 0.045;
+  mix-blend-mode: screen;
+}
+
+::selection {
+  background: rgb(var(--color-saffron));
+  color: rgb(var(--color-ink));
+}
+
+.zellige-surface {
+  background-size: 42px 42px;
+  background-position: 0 0, 21px 0, 21px -21px, 0 21px;
+}
+
+.hero-theme-overlay {
+  background:
+    radial-gradient(circle at 15% 18%, rgb(var(--color-saffron) / 0.13), transparent 28%),
+    radial-gradient(circle at 80% 18%, rgb(var(--color-atlas-500) / 0.1), transparent 24%),
+    linear-gradient(135deg, rgb(var(--color-ivory) / 0.5), rgb(var(--color-saffron) / 0.1) 42%, rgb(var(--color-atlas-50) / 0.24));
+}
+
+.dark .hero-theme-overlay {
+  background:
+    radial-gradient(circle at 12% 16%, rgb(var(--color-saffron) / 0.14), transparent 26%),
+    radial-gradient(circle at 84% 18%, rgb(var(--color-atlas-500) / 0.16), transparent 24%),
+    linear-gradient(135deg, rgb(var(--color-atlas-950) / 0.58), rgb(var(--color-atlas-800) / 0.46) 52%, rgb(var(--color-ink) / 0.28));
+}
+
+.ambient-hero-picture {
+  animation: heroPictureDrift 28s ease-in-out infinite alternate;
+  transform: scale(1.06);
+  transform-origin: center;
+  will-change: transform;
+}
+
+.hero-copy-scrim {
+  position: relative;
+  border: 1px solid rgb(var(--color-saffron) / 0.2);
+  border-radius: 1.65rem;
+  background: rgb(var(--color-ivory) / 0.62);
+  box-shadow: 0 24px 78px rgb(var(--color-ink) / 0.14);
+  padding: clamp(1.2rem, 2.5vw, 2rem);
+  backdrop-filter: blur(10px);
+}
+
+.dark .hero-copy-scrim {
+  border-color: rgb(var(--color-saffron) / 0.18);
+  background: rgb(var(--color-atlas-950) / 0.58);
+  box-shadow: 0 28px 90px rgb(0 0 0 / 0.32);
+}
+
+.solid-section-gradient {
+  overflow: hidden;
+  border-block: 1px solid rgb(var(--color-saffron) / 0.14);
+  background:
+    radial-gradient(circle at 12% 18%, rgb(var(--color-saffron) / 0.18), transparent 24rem),
+    linear-gradient(135deg, #f3dfaa 0%, #fff2cb 48%, #e6c77b 100%);
+}
+
+.dark .solid-section-gradient {
+  background:
+    radial-gradient(circle at 10% 12%, rgb(var(--color-saffron) / 0.18), transparent 24rem),
+    linear-gradient(135deg, rgb(var(--color-atlas-950)) 0%, rgb(var(--color-atlas-800)) 58%, rgb(var(--color-ink)) 100%);
+}
+
+.solid-section-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png'),
+    url('/assets/moroccan-pattern-motif.png');
+  background-position: -8rem -8rem, calc(100% + 9rem) 36%, 55% calc(100% + 10rem);
+  background-repeat: no-repeat;
+  background-size: 18rem 18rem, 22rem 22rem, 20rem 20rem;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+
+.dark .solid-section-gradient::before {
+  opacity: 0.05;
+  mix-blend-mode: screen;
+}
+
+.solid-section-gradient > * {
+  position: relative;
+  z-index: 1;
+}
+
+.slider-theme-glow {
+  background: linear-gradient(115deg, rgb(var(--color-saffron) / 0.15), transparent 40%, rgb(var(--color-atlas-500) / 0.16));
+}
+
+.card-image-sheen {
+  background: linear-gradient(115deg, rgb(var(--color-saffron) / 0.1), transparent 46%, rgb(var(--color-ivory) / 0.1));
+}
+
+.glass-panel {
+  border: 1px solid rgb(var(--color-saffron) / 0.18);
+  background: rgb(var(--color-ivory) / 0.86);
+  box-shadow: 0 24px 80px rgb(var(--color-ink) / 0.15);
+  backdrop-filter: blur(22px);
+}
+
+.dark .glass-panel {
+  border-color: rgb(var(--color-saffron) / 0.16);
+  background: rgb(var(--color-atlas-950) / 0.78);
+}
+
+.focus-ring {
+  outline: 2px solid transparent;
+  outline-offset: 3px;
+}
+
+.focus-ring:focus-visible {
+  outline-color: rgb(var(--color-saffron));
+}
+
+.hero-slider-shell {
+  position: relative;
+  border-radius: 1.6rem;
+  padding: 0.45rem;
+  background:
+    linear-gradient(135deg, rgb(var(--color-atlas-800) / 0.9), rgb(var(--color-saffron) / 0.92) 46%, rgb(var(--color-atlas-500) / 0.86)),
+    rgb(var(--color-saffron));
+  box-shadow: 0 30px 90px rgb(var(--color-ink) / 0.2);
+}
+
+.dark .hero-slider-shell {
+  background:
+    linear-gradient(135deg, rgb(var(--color-saffron) / 0.82), rgb(var(--color-atlas-800) / 0.9) 42%, rgb(var(--color-ink) / 0.82)),
+    rgb(var(--color-atlas-950));
+  box-shadow: 0 34px 96px rgb(0 0 0 / 0.42);
+}
+
+.isometric-card {
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(4deg) rotateY(-4deg);
+}
+
+[dir="rtl"] .isometric-card {
+  transform: perspective(1200px) rotateX(4deg) rotateY(4deg);
+}
+
+html.dark body :is(h1, h3, h5) {
+  color: rgb(var(--color-saffron)) !important;
+}
+
+html.dark body :is(h2, h4, h6) {
+  color: rgb(var(--color-atlas-200)) !important;
+}
+
+@keyframes cinematicDrift {
+  0% {
+    transform: scale(1.04) translate3d(-1.2%, -0.8%, 0);
+    background-position: 50% 50%;
+  }
+  100% {
+    transform: scale(1.08) translate3d(1.1%, 0.9%, 0);
+    background-position: 56% 48%;
+  }
+}
+
+@keyframes heroPictureDrift {
+  0% {
+    transform: scale(1.06) translate3d(-1.4%, -0.9%, 0);
+  }
+  100% {
+    transform: scale(1.1) translate3d(1.2%, 0.8%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .ambient-hero-picture,
+  body::before {
+    transform: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-slider-shell {
+    border-radius: 1.45rem;
+    padding: 0.38rem;
+  }
+}
